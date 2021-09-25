@@ -8,8 +8,12 @@ const list = require('./database/models/list')
 app.use(express.json());
 app.use(cors());
 
-app.get('/lists',(req,res) =>{
-    list.find({}).then(lists => res.send(lists))
-})
+// app.get('/lists',(req,res) =>{
+//     list.find({}).then(lists => res.send(lists))
+// })
 
-app.listen(() => console.log("Server is connected on port 8080"))
+mongoose.connect('mongodb://database:27017/productsdb')
+    .then(() => console.log("Database connected"))
+    .catch((error) => console.log(error));
+
+app.listen(8080,() => console.log("Server is connected on port 8080"))
