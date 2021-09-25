@@ -12,4 +12,4 @@ app.get('/lists',(req,res) =>{
     list.find({}).then(lists => res.send(lists))
 })
 
-app.listen(3000, () => console.log("Server is connected on port 3000"))
+app.listen(() => console.log("Server is connected on port 8080"))
