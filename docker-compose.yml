@@ -14,18 +14,14 @@ services:
       - database
     depends_on:
       - database
-  mongodb: # name of the third service
+  mongo: # name of the third service
+    container_name: mongo
     image: mongo
     ports:
       - "27017:27017"
-    environment:
-      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
-      - ME_CONFIG_MONGODB_ADMINPASSWORD=password
   mongo-express:
     image: mongo-express
     ports:
       - "8081:8081"
     environment:
-      - ME_CONFIG_MONGODB_SERVER=mongodb
-      - ME_CONFIG_MONGODB_ADMINPASSWORD=password
-      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_SERVER=mongo
