@@ -29,6 +29,26 @@ request(url, { json: true }, (err, res, body) => {
   else console.log(res.statusCode);
 });
 
+app.get("/", async (req, res) => {
+  let val = req.params.id;
+ 
+  try {
+    const test = await db.collection('reviews').find({});
+    db.close();
+    if (test == null)
+      res.json("Try Again");
+    else {
+      console.log('Response sent')
+      res.json(test);
+    }
+  }
+  catch (error) {
+    console.log("Error in try")
+     res.status(500).json({ message: error.message })
+    
+  };
+})
+
 app.post("/", function (req, res) {
     MongoClient.connect('mongodb://mongo:27017/', function (err, client) {
       assert.equal(null, err);
