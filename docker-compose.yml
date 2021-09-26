@@ -1,24 +1,31 @@
-version: '3' # specify docker-compose version
- 
+version: "3" # specify docker-compose version
+
 # Define the services/containers to be run
 services:
- client:
-   build: ./frontend
-   ports:
-     - "8000:80"
- server: # name of the first service
-   build: ./backend # specify the directory of the Dockerfile
-   ports:
-     - "8080:8080"
-   environment:
-     - MONGO_URL=mongodb://database/amazon-products-app
-   links:
-     - database
-   depends_on:
-     - database
- database: # name of the third service
-   image: mongo # specify image to build container from
-   volumes:
-     - "/data/db:/data/db"
-   ports:
-     - "27017:27017" # specify port forewarding
+  client:
+    build: ./frontend
+    ports:
+      - "8000:80"
+  server: # name of the first service
+    build: ./backend # specify the directory of the Dockerfile
+    ports:
+      - "8080:8080"
+    links:
+      - database
+    depends_on:
+      - database
+  mongodb: # name of the third service
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+  mongo-express:
+    image: mongo-express
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
