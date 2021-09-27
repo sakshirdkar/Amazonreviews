@@ -11,7 +11,8 @@ app.use(express.urlencoded({ extended: false }));
 
 // import routes
 const categoryRoutes = require('./routes/categories');
-app.use('/',categoryRoutes);
+const messageRoutes = require('./routes/messages');
+app.use('/',messageRoutes);
 
 
 // Connect to MongoDB

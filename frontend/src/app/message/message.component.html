@@ -1,0 +1,15 @@
+<div class="container">
+    <h1>Send us a message!</h1>
+    <form [formGroup]="messageForm" (ngSubmit)="sendMessage()">
+        <div class="form-group">
+        <input class="form-control mt-2" id="content" type="text-area" formControlName="content">
+        <button type="submit" class="btn btn-primary mt-2">Send Message</button>
+        </div>
+    </form>
+    <h1>Messages we recieved until now:</h1>
+    <ul *ngIf="messages?.length > 0">
+        <li *ngFor="let message of messages">
+            {{message.content}}
+          </li>
+    </ul>
+</div>

@@ -24,6 +24,7 @@ services:
     volumes:
       - mongo-data:/data/db
   mongo-express:
+    container_name: mongo-express
     image: mongo-express
     ports:
       - "8081:8081"
