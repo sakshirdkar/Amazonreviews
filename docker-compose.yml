@@ -2,6 +2,12 @@ version: "3" # specify docker-compose version
 
 # Define the services/containers to be run
 services:
+  publisher:
+    container_name: publisher
+    build: ./publisher # specify the directory of the Dockerfile
+    ports:
+      - "3001:3001"
+    
   client:
     container_name: client
     build: ./frontend

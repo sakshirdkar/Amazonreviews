@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const CategorySchema = mongoose.Schema({
-    amazon_domain : String,
+    amazon_domain: String,
     id: String,
     name: String,
     has_children: Boolean,
@@ -13,4 +13,4 @@ const CategorySchema = mongoose.Schema({
     type: String
 });
 
-module.exports = mongoose.model('Categories',CategorySchema);
+module.exports = mongoose.model('Categories', CategorySchema);

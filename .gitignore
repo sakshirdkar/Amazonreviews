@@ -9,6 +9,7 @@
 
 # dependencies
 /frontend/node_modules
+/publisher/node_modules
 /.vs
 /backend/node_modules
 
