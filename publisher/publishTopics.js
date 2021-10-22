@@ -1,35 +1,50 @@
-const TopicIphone12 = require('./TopicIphone12');
-const TopicMacBookPro = require('./TopicMacBookPro');
-const TopicMysteryBooks = require('./TopicMysteryBooks');
+//const TopicIphone12 = require('./TopicIphone12');
+//const TopicMacBookPro = require('./TopicMacBookPro');
+//const TopicMysteryBooks = require('./TopicMysteryBooks');
 
-const express = require('express');
-const app = express();
-app.use(express.json());
-//const Iphone12 = TopicIphone12();
-//const MacBookPro = TopicMacBookPro();
-//const MysteryBooks = TopicMysteryBooks();
+
 
 const request = require('request');
-publish(TopicIphone12);
+const express = require('express');
+const fetchDataFromAPI = require('./fetchDataFromAPI');
 
-function publish(topic) {
-    //console.log("vvvvvv", topic());
+
+const app = express();
+app.use(express.json());
+
+
+const TopicIphone = "IPHONE";
+const TopicMacBook = "MACBOOK";
+const TopicMysteryBooks = "MYSTERY BOOKS";
+//Topics 1,2,3
+
+fetchDataFromAPI(TopicIphone).then(data => publish(data));
+//const MysteryandSuspenseBooks = fetchDataFromAPI('Mystery and suspense books ');
+//const MacBook = fetchDataFromAPI('MacBook');
+
+
+//publish(MysteryandSuspenseBooks)
+
+
+
+function publish(data) {
+
     const options = {
         url: 'http://127.0.0.1:8080',
         json: true,
-        body: topic()
+        body: data
     };
 
     request.post(options, (err, res, body) => {
         if (err) {
             return console.log(err);
         }
-        console.log(`Status: ${res.statusCode}`);
+
         console.log(body);
     });
 }
 
 const port = 3001;
 
-app.listen(port, () => console.log('Server running... on port 3000'));
+app.listen(port, () => console.log('Server running... on port 3001'));
 module.exports = publish;

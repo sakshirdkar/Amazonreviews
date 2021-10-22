@@ -14,7 +14,7 @@ function IPhone12() {
     request(options, function (error, response, body) {
         if (error) throw new Error(error);
 
-        return body.results;
+        return { '': body.results };
     });
 
 }
