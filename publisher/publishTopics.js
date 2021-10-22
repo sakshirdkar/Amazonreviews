@@ -2,9 +2,6 @@
 //const TopicMacBookPro = require('./TopicMacBookPro');
 //const TopicMysteryBooks = require('./TopicMysteryBooks');
 
-
-
-const request = require('request');
 const express = require('express');
 const fetchDataFromAPI = require('./fetchDataFromAPI');
 
@@ -19,6 +16,8 @@ const TopicMysteryBooks = "MYSTERY BOOKS";
 //Topics 1,2,3
 
 fetchDataFromAPI(TopicIphone).then(data => publish(data));
+fetchDataFromAPI(TopicMacBook).then(data => publish(data));
+fetchDataFromAPI(TopicMysteryBooks).then(data => publish(data));
 //const MysteryandSuspenseBooks = fetchDataFromAPI('Mystery and suspense books ');
 //const MacBook = fetchDataFromAPI('MacBook');
 

@@ -1,9 +1,9 @@
 const request = require('request');
-function IPhone12() {
+function fetchDataFromAPI(Topic) {
     const options = {
         method: 'GET',
         url: 'https://amazon-products1.p.rapidapi.com/search',
-        qs: { country: 'US', query: 'IPhone12', page: '1' },
+        qs: { country: 'US', query: Topic, page: '1' },
         headers: {
             'x-rapidapi-host': 'amazon-products1.p.rapidapi.com',
             'x-rapidapi-key': '9dde9552d6msha8340ad20371c38p1cbd95jsnfd9e75355554',
@@ -11,11 +11,13 @@ function IPhone12() {
         }
     };
 
-    request(options, function (error, response, body) {
-        if (error) throw new Error(error);
+    const response = await request(options);
+    const data = {
+        "topicName": Topic,
+        "results": response.results
+    }
 
-        return { '': body.results };
-    });
+    return data;
 
 }
-module.exports = IPhone12;
+module.exports = fetchDataFromAPI;
