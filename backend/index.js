@@ -33,9 +33,11 @@ app.use(passport.session());
 // import routes
 const categoryRoutes = require('./routes/categories');
 const messageRoutes = require('./routes/messages');
+const productroutes = require('./routes/products');
 const userRoutes = require('./routes/users');
 const subscriptionRoutes = require('./routes/subscriptions');
 app.use('/users/',userRoutes);
+app.use('/products/',productroutes);
 app.use('/subscribe/',subscriptionRoutes);
 
 // Connect to MongoDB

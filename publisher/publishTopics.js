@@ -16,9 +16,33 @@ const TopicMacBook = "MACBOOK";
 const TopicMysteryBooks = "MYSTERY BOOKS";
 //Topics 1,2,3
 
-fetchDataFromAPI(TopicIphone).then(data => publish(data));
-fetchDataFromAPI(TopicMacBook).then(data => publish(data));
-fetchDataFromAPI(TopicMysteryBooks).then(data => publish(data));
+// publish(fetchDataFromAPI(TopicIphone))
+// publish(fetchDataFromAPI(TopicMacBook))
+fetchDataFromAPI(TopicIphone).then(data => {
+    var model ={
+            "topicName": TopicIphone,
+            "results": data
+        }
+    publish(model)
+});
+
+fetchDataFromAPI(TopicMysteryBooks).then(data => {
+    var model ={
+            "topicName": TopicMysteryBooks,
+            "results": data
+        }
+    publish(model)
+});
+
+fetchDataFromAPI(TopicMacBook).then(data => {
+    var model ={
+            "topicName": TopicMacBook,
+            "results": data
+        }
+    publish(model)
+});
+// fetchDataFromAPI(TopicMacBook).then(data => publish(data));
+// fetchDataFromAPI(TopicMysteryBooks).then(data => publish(data));
 //const MysteryandSuspenseBooks = fetchDataFromAPI('Mystery and suspense books ');
 //const MacBook = fetchDataFromAPI('MacBook');
 
@@ -30,17 +54,16 @@ fetchDataFromAPI(TopicMysteryBooks).then(data => publish(data));
 function publish(data) {
 
     const options = {
-        url: 'http://127.0.0.1:8080',
+        url: 'http://127.0.0.1:8080/products/',
         json: true,
         body: data
     };
-    // console.log(options)
+    console.log("options",options)
 
     request.post(options, (err, res, body) => {
         if (err) {
             return console.log(err);
         }
-
         console.log(body);
     });
 }

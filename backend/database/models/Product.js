@@ -5,10 +5,10 @@ const ProductSchema = mongoose.Schema({
     asin: String,
     id: String,
     full_link: String,
-    image: Boolean,
-    prices: Boolean,
+    image: [],
+    prices: [],
     prime: String,
-    reviews: String,
+    reviews: [],
     sponsored: String,
     title: String,
 });

@@ -12,9 +12,10 @@ const TopicMysteryBooks = "MYSTERY BOOKS";
 
 router.post('/', async (req, res) => {
     const topicName = req.body.topicName;
-
+    var products =  req.body.results;
     if (topicName == TopicIphone) {
-        req.body.data.forEach(productFromAPI => {
+        products.forEach(productFromAPI => {
+            console.log(productFromAPI);
             const product = new Products.IPhoneProducts({
                 topicName: topicName,
                 asin: productFromAPI.asin,
@@ -34,7 +35,7 @@ router.post('/', async (req, res) => {
     }
 
     else if (topicName == TopicMacBook) {
-        req.body.data.forEach(productFromAPI => {
+        products.forEach(productFromAPI => {
             const product = new Products.MacBookProducts({
                 topicName: topicName,
                 asin: productFromAPI.asin,
@@ -52,7 +53,7 @@ router.post('/', async (req, res) => {
 
     }
     else if (topicName == TopicMysteryBooks) {
-        req.body.data.forEach(productFromAPI => {
+        products.forEach(productFromAPI => {
             const product = new Products.MysteryBooksProducts({
                 topicName: topicName,
                 asin: productFromAPI.asin,
