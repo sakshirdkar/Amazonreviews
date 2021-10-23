@@ -54,7 +54,7 @@ fetchDataFromAPI(TopicMacBook).then(data => {
 function publish(data) {
 
     const options = {
-        url: 'http://127.0.0.1:8080/products/',
+        url: 'http://server:8080/products/',
         json: true,
         body: data
     };

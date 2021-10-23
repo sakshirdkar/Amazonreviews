@@ -19,9 +19,9 @@ services:
     ports:
       - "8080:8080"
     links:
-      - database
+      - mongo
     depends_on:
-      - database
+      - mongo
   mongo: # name of the third service
     container_name: mongo
     image: mongo
