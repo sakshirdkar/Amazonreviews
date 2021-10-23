@@ -1,5 +1,4 @@
 const request = require('request');
-// const request = require('axios');
 async function fetchDataFromAPI(Topic) {
     const options = {
         method: 'GET',
@@ -7,7 +6,7 @@ async function fetchDataFromAPI(Topic) {
         qs: { country: 'US', query: Topic, page: '1' },
         headers: {
             'x-rapidapi-host': 'amazon-products1.p.rapidapi.com',
-            'x-rapidapi-key': '9dde9552d6msha8340ad20371c38p1cbd95jsnfd9e75355554',
+            'x-rapidapi-key': '52dbbe839dmshe6180372ad28496p1d28fcjsnc17ef4914a33',
             useQueryString: true
         }
     };
