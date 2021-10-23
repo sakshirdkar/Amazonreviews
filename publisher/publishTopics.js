@@ -3,6 +3,7 @@
 //const TopicMysteryBooks = require('./TopicMysteryBooks');
 
 const express = require('express');
+const request = require('request');
 const fetchDataFromAPI = require('./fetchDataFromAPI');
 
 
@@ -33,6 +34,7 @@ function publish(data) {
         json: true,
         body: data
     };
+    // console.log(options)
 
     request.post(options, (err, res, body) => {
         if (err) {

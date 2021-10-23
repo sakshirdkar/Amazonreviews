@@ -19,10 +19,21 @@ export class UserHomeComponent implements OnInit {
       },
       error=>this._router.navigate(['/login'])
     )
+
+    this.getSubscriptions();
+  }
+
+  subscribeToTopic(topic){
+    this._user.subscribeToTopic(topic).subscribe();
+    this.getSubscriptions();
+  }
+
+  getSubscriptions(){
+    this._user.getSubscriptions().subscribe();
   }
 
   addName(data){
-    this.username = data.username;
+    this.username = data;
   }
   ngOnInit() {
   }
@@ -35,8 +46,5 @@ export class UserHomeComponent implements OnInit {
     // )
   }
 
-  subscribeToTopic(){
-    
-  }
 
 }

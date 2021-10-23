@@ -1,5 +1,6 @@
 const request = require('request');
-function fetchDataFromAPI(Topic) {
+// const request = require('axios');
+async function fetchDataFromAPI(Topic) {
     const options = {
         method: 'GET',
         url: 'https://amazon-products1.p.rapidapi.com/search',
@@ -11,7 +12,8 @@ function fetchDataFromAPI(Topic) {
         }
     };
 
-    const response = await request(options);
+    const response = request(options);
+    console.log("response",response)
     const data = {
         "topicName": Topic,
         "results": response.results

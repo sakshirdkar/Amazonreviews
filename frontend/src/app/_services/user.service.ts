@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -15,6 +15,8 @@ export class UserService {
   private currentUserSource = new ReplaySubject<any>(1);
   currentUser$ = this.currentUserSource.asObservable();
 
+  username : string;
+
   register(body:any){
     return this.http.post(this.baseUrl + '/users/register',body,{
       observe:'body',
@@ -28,14 +30,7 @@ export class UserService {
       observe:'body',
       withCredentials:true,
       headers:new HttpHeaders().append('Content-Type','application/json')
-    }).pipe(
-      map((response : any)=>{
-        const user = response;
-        if(user){
-          this.setCurrentUser(user);
-        }
-      })
-    );
+    });
   }
 
   user(){
@@ -43,7 +38,40 @@ export class UserService {
       observe:'body',
       withCredentials:true,
       headers:new HttpHeaders().append('Content-Type','application/json')
+    }).pipe(
+      map((response : any)=>{
+        const user = response;
+        if(user){
+          this.username = user.username;
+        }
+        return this.username;
+      })
+    );
+  }
+
+  subscribeToTopic(topic){
+    let body:any = {
+      'username' : this.username,
+      'topic': topic
+    }
+    return this.http.post(this.baseUrl + '/subscribe',body,{
+      observe:'body',
+      withCredentials:true,
+      headers:new HttpHeaders().append('Content-Type','application/json')
     })
+  }
+
+  getSubscriptions(){
+    var params = new HttpParams();
+    params = params.append('username',this.username);
+
+
+    return this.http.get(this.baseUrl + '/subscribe',{
+      observe:'body',
+      params,
+      withCredentials:true,
+      headers:new HttpHeaders().append('Content-Type','application/json')
+    });
   }
 
   logout(){
