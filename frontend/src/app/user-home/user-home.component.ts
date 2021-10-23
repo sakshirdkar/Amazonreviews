@@ -8,36 +8,40 @@ import { UserService } from '../_services/user.service';
   styleUrls: ['./user-home.component.css']
 })
 export class UserHomeComponent implements OnInit {
+
+  result : any = {};
   topic : String=''
   username:String='';
   constructor(private _user:UserService, private _router:Router) { 
     this._user.user()
     .subscribe(
       data=>{
-        console.log(data)
         this.addName(data)
       },
       error=>this._router.navigate(['/login'])
     )
-
-    this.getSubscriptions();
   }
-
   subscribeToTopic(topic){
     this._user.subscribeToTopic(topic).subscribe();
     this.getSubscriptions();
   }
 
   getSubscriptions(){
-    this._user.getSubscriptions().subscribe();
+    this._user.getSubscriptions().subscribe(res  =>{
+      this.result = res;
+    });
   }
 
   addName(data){
     this.username = data;
   }
   ngOnInit() {
+    this.getSubscriptions();
+    setInterval(()=> { this.poll(), console.log('polling') },10000);
   }
-
+  poll(){
+    this.getSubscriptions();
+  }
   logout(){
     this._user.logout()
     // .subscribe(

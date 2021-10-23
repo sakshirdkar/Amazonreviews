@@ -18,21 +18,21 @@ const TopicMysteryBooks = "MYSTERY BOOKS";
 
 // publish(fetchDataFromAPI(TopicIphone))
 // publish(fetchDataFromAPI(TopicMacBook))
-fetchDataFromAPI(TopicIphone).then(data => {
-    var model ={
-            "topicName": TopicIphone,
-            "results": data
-        }
-    publish(model)
-});
+// fetchDataFromAPI(TopicIphone).then(data => {
+//     var model ={
+//             "topicName": TopicIphone,
+//             "results": data
+//         }
+//     publish(model)
+// });
 
-fetchDataFromAPI(TopicMysteryBooks).then(data => {
-    var model ={
-            "topicName": TopicMysteryBooks,
-            "results": data
-        }
-    publish(model)
-});
+// fetchDataFromAPI(TopicMysteryBooks).then(data => {
+//     var model ={
+//             "topicName": TopicMysteryBooks,
+//             "results": data
+//         }
+//     publish(model)
+// });
 
 fetchDataFromAPI(TopicMacBook).then(data => {
     var model ={
