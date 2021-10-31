@@ -14,37 +14,64 @@ const TopicMysteryBooks = "MYSTERY BOOKS";
 
 
 fetchDataFromAPI(TopicIphone).then(data => {
-    var model ={
-            "topicName": TopicIphone,
-            "results": data
-        }
+    var model = {
+        "topicName": TopicIphone,
+        "results": data
+    }
     publish(model)
 });
 
 fetchDataFromAPI(TopicMysteryBooks).then(data => {
-    var model ={
-            "topicName": TopicMysteryBooks,
-            "results": data
-        }
+    var model = {
+        "topicName": TopicMysteryBooks,
+        "results": data
+    }
     publish(model)
 });
 
 fetchDataFromAPI(TopicMacBook).then(data => {
-    var model ={
-            "topicName": TopicMacBook,
-            "results": data
-        }
+    var model = {
+        "topicName": TopicMacBook,
+        "results": data
+    }
     publish(model)
 });
 
-function publish(data) {
+
+
+
+const Topics = ["IPHONE", "MACBOOK", "MYSTERY BOOKS"];
+const totalTopics = Topics.length;
+const brokerCount = 3;
+const topicPerBroker = len / brokerCount;
+const brokerUrl = ["http://server:8080/products/", "http://server:8081/products/", "http://server:8082/products/"];
+let broker = 0;
+
+while (i < totalTopics) {
+    let j = 1;
+    while (j <= topicPerBroker) {
+        fetchDataFromAPI(Topics[i]).then(data => {
+            var model = {
+                "topicName": Topics[i],
+                "results": data
+            }
+            publish(model)
+        });
+        j++;
+        i++;
+    }
+    broker++;
+}
+
+
+function publish(data, URL) {
 
     const options = {
-        url: 'http://server:8080/products/',
+        url: URL,
         json: true,
         body: data
     };
-    console.log("options",options)
+    console.log("options", options)
 
     request.post(options, (err, res, body) => {
         if (err) {
