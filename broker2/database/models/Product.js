@@ -13,9 +13,9 @@ const ProductSchema = mongoose.Schema({
     title: String,
 });
 
-const IPhoneProducts = mongoose.model('IPhoneProducts', ProductSchema);
-const MacBookProducts = mongoose.model('MacBookProducts', ProductSchema);
+const MysteryBook = mongoose.model('MysteryBooks', ProductSchema);
+const RomanticNovel = mongoose.model('RomanticNovels', ProductSchema);
 
 module.exports = {
-    IPhoneProducts, MacBookProducts
+    MysteryBook, RomanticNovel
 };

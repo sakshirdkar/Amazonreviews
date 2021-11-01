@@ -43,7 +43,7 @@ app.use('/subscribe/',subscriptionRoutes);
 // Connect to MongoDB
 mongoose
   .connect(
-    'mongodb://mongo:27017/AmazonProducts',
+    'mongodb://localhost:27017/AmazonProducts',
     { useNewUrlParser: true }
   )
   .then(() => console.log('MongoDB Connected'))

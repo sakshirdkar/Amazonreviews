@@ -12,6 +12,8 @@
 /publisher/node_modules
 /.vs
 /backend/node_modules
+/broker2/node_modules
+/broker3/node_modules
 
 # profiling files
 chrome-profiler-events*.json

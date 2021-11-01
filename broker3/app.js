@@ -1,16 +1,20 @@
 const express = require('express');
-const router = express.Router();
-const Products = require('../database/models/Product');
-const brokerAddress = require('../mapTopicToBroker');
+const mongoose = require('mongoose');
 const request = require('request');
+const app = express();
+const cors = require('cors');
+const Products = require('./database/models/Product');
+const brokerAddress = require('./mapTopicToBroker');
 
 
-router.get('/', async (req, res) => {
-    const products = await Products.find();
-    res.json(products);
-});
-const TopicIphone = "IPHONE";
-const TopicMacBook = "MACBOOK";
+
+app.use(express.json());
+app.use(cors());
+app.use(express.urlencoded({ extended: false }));
+
+
+const TopicMoisturiser= "MOISTURISER";
+const TopicShampoo = "SHAMPOO";
 
 function redirect(_url,_body){
     console.log(data);
@@ -31,14 +35,14 @@ function redirect(_url,_body){
 
 
 
-router.post('/', async (req, res) => {
+app.post('/', async (req, res) => {
     const body = req.body;
-    const topicName =body.topicName;
-    var products = body.results;
-    if (topicName == TopicIphone) {
+    const topicName = body.topicName;
+    var products =  body.results;
+    if (topicName == TopicMoisturiser) {
         products.forEach(productFromAPI => {
             console.log(productFromAPI);
-            const product = new Products.IPhoneProducts({
+            const product = new Products.Moisturizer({
                 topicName: topicName,
                 asin: productFromAPI.asin,
                 id: productFromAPI.id,
@@ -56,9 +60,9 @@ router.post('/', async (req, res) => {
 
     }
 
-    else if (topicName == TopicMacBook) {
+    else if (topicName == TopicShampoo) {
         products.forEach(productFromAPI => {
-            const product = new Products.MacBookProducts({
+            const product = new Products.Shampoo({
                 topicName: topicName,
                 asin: productFromAPI.asin,
                 id: productFromAPI.id,
@@ -79,4 +83,16 @@ router.post('/', async (req, res) => {
     }
 })
 
-module.exports = router;
+// Connect to MongoDB
+mongoose
+  .connect(
+    'mongodb://localhost:27017/AmazonProducts',
+    { useNewUrlParser: true }
+  )
+  .then(() => console.log('MongoDB Connected'))
+  .catch(err => console.log(err));
+
+
+const port = 8082;
+
+app.listen(port, () => console.log('Server running... on port 8082'));

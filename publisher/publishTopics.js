@@ -7,46 +7,47 @@ const app = express();
 app.use(express.json());
 
 
-const TopicIphone = "IPHONE";
-const TopicMacBook = "MACBOOK";
-const TopicMysteryBooks = "MYSTERY BOOKS";
-//Topics 1,2,3
+// const TopicIphone = "IPHONE";
+// const TopicMacBook = "MACBOOK";
+// const TopicMysteryBooks = "MYSTERY BOOKS";
+// //Topics 1,2,3
 
 
-fetchDataFromAPI(TopicIphone).then(data => {
-    var model = {
-        "topicName": TopicIphone,
-        "results": data
-    }
-    publish(model)
-});
+// fetchDataFromAPI(TopicIphone).then(data => {
+//     var model = {
+//         "topicName": TopicIphone,
+//         "results": data
+//     }
+//     publish(model)
+// });
 
-fetchDataFromAPI(TopicMysteryBooks).then(data => {
-    var model = {
-        "topicName": TopicMysteryBooks,
-        "results": data
-    }
-    publish(model)
-});
+// fetchDataFromAPI(TopicMysteryBooks).then(data => {
+//     var model = {
+//         "topicName": TopicMysteryBooks,
+//         "results": data
+//     }
+//     publish(model)
+// });
 
-fetchDataFromAPI(TopicMacBook).then(data => {
-    var model = {
-        "topicName": TopicMacBook,
-        "results": data
-    }
-    publish(model)
-});
-
-
+// fetchDataFromAPI(TopicMacBook).then(data => {
+//     var model = {
+//         "topicName": TopicMacBook,
+//         "results": data
+//     }
+//     publish(model)
+// });
 
 
-const Topics = ["IPHONE", "MACBOOK", "MYSTERY BOOKS"];
+
+
+const Topics = ["IPHONE", "MACBOOK", "MYSTERY BOOKS", "ROMANTIC NOVELS", "MOISTURISER", "SHAMPOO"];
+
 const totalTopics = Topics.length;
-const brokerCount = 3;
-const topicPerBroker = len / brokerCount;
-const brokerUrl = ["http://server:8080/products/", "http://server:8081/products/", "http://server:8082/products/"];
-let broker = 0;
+const brokerUrls = ["http://server:8080/products/", "http://server:8081/products/", "http://server:8082/products/"];
+const topicPerBroker = len / brokerUrls.count;
 
+let broker = 0;
+let i = 1;
 while (i < totalTopics) {
     let j = 1;
     while (j <= topicPerBroker) {
@@ -55,7 +56,7 @@ while (i < totalTopics) {
                 "topicName": Topics[i],
                 "results": data
             }
-            publish(model)
+            publish(model,brokerUrls[broker])
         });
         j++;
         i++;
