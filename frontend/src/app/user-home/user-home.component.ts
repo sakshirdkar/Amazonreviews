@@ -8,8 +8,17 @@ import { UserService } from '../_services/user.service';
   styleUrls: ['./user-home.component.css']
 })
 export class UserHomeComponent implements OnInit {
-
-  result : any = {};
+  available_topics: any = [
+    'IPhoneProducts', 
+    'MacBookProducts', 
+    'MysteryBooks', 
+    'RomanticNovels', 
+    'Moisturizers', 
+    'Shampoos' 
+  ]
+  broker1_result : any = {};
+  broker2_result : any = {};
+  broker3_result : any = {};
   topic : String=''
   username:String='';
   constructor(private _user:UserService, private _router:Router) { 
@@ -22,13 +31,36 @@ export class UserHomeComponent implements OnInit {
     )
   }
   subscribeToTopic(topic){
-    this._user.subscribeToTopic(topic).subscribe();
-    this.getSubscriptions();
+    this._user.subscribeToTopic(topic).subscribe(() =>{
+      this.poll();
+    });
+  }
+
+  unsubscribeToTopic(topic){
+    console.log("topic to un", topic)
+    this._user.unsubscribeToTopic(topic).subscribe(() =>{
+      this.poll();
+    });
   }
 
   getSubscriptions(){
     this._user.getSubscriptions().subscribe(res  =>{
-      this.result = res;
+      this.broker1_result = res;
+      console.log(this.broker1_result);
+    });
+  }
+
+  getSubscriptions_broker2(){
+    this._user.getSubscriptions_broker2().subscribe(res  =>{
+      this.broker2_result = res;
+      console.log(this.broker2_result);
+    });
+  }
+
+  getSubscriptions_broker3(){
+    this._user.getSubscriptions_broker3().subscribe(res  =>{
+      this.broker3_result = res;
+      console.log(this.broker3_result);
     });
   }
 
@@ -36,11 +68,13 @@ export class UserHomeComponent implements OnInit {
     this.username = data;
   }
   ngOnInit() {
-    this.getSubscriptions();
-    setInterval(()=> { this.poll(), console.log('polling') },10000);
+    this.poll();
+    setInterval(()=> { this.poll(), console.log('polling') },1000);
   }
   poll(){
     this.getSubscriptions();
+    this.getSubscriptions_broker2();
+    this.getSubscriptions_broker3();
   }
   logout(){
     this._user.logout()

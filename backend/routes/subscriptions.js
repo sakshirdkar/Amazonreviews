@@ -14,20 +14,15 @@ router.get('/', async (req, res) => {
     });
     var IPhoneProducts = {}
     var MacBookProducts = {}
-    var MysteryBooksProducts = {}
     var result = {
         'IPhoneProducts' : IPhoneProducts,
         'MacBookProducts' : MacBookProducts,
-        'MysteryBooksProducts' : MysteryBooksProducts
     }
     if(topics.includes('IPhoneProducts')){
         result.IPhoneProducts = await ProductModel.IPhoneProducts.find()
     }
     if(topics.includes('MacBookProducts')){
         result.MacBookProducts = await ProductModel.MacBookProducts.find()
-    }
-    if(topics.includes('MysteryBooksProducts')){
-        result.MysteryBooksProducts = await ProductModel.MysteryBooksProducts.find()
     }
 
     console.log("topics", topics);
@@ -36,7 +31,6 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    console.log("inside subscribe post method")
     const new_subscription = new Subscription({
         username: req.body.username,
         topic: req.body.topic
@@ -48,6 +42,18 @@ router.post('/', async (req, res) => {
         { 
             new_subscription.save();
         }
+    })
+
+});
+
+router.post('/unregister', async (req, res) => {
+    const new_subscription = new Subscription({
+        username: req.body.username,
+        topic: req.body.topic
+    })
+    Subscription.deleteOne({ username: new_subscription.username, topic: new_subscription.topic }, function (err, obj) {
+        if (err) throw err;
+        console.log("unsibscribed");
     })
 
 });

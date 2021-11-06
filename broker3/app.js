@@ -4,12 +4,16 @@ const request = require('request');
 const app = express();
 const cors = require('cors');
 const Products = require('./database/models/Product');
+const Subscriptions = require('./database/models/Subscription');
 const brokerAddress = require('./mapTopicToBroker');
 
 
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin:['http://localhost:4200','http://127.0.0.1:4200'],
+    credentials:true
+  }));
 app.use(express.urlencoded({ extended: false }));
 
 
@@ -82,6 +86,35 @@ app.post('/', async (req, res) => {
         redirect(brokerAddress(topicName), body);
     }
 })
+
+
+app.get('/subscribe', async (req, res) => {
+    const subscriptions = await Subscriptions.find();
+    var username = req.query.username;
+    topics = []
+    subscriptions.forEach(element => {
+        if (username == element.username) {
+            topics.push(element.topic)
+        }
+    });
+    var Moisturizers = {}
+    var Shampoos = {}
+    var result = {
+        'Moisturizers' : Moisturizers,
+        'Shampoos' : Shampoos
+    }
+
+    if(topics.includes('Moisturizers')){
+        result.Moisturizers = await Products.Moisturizer.find()
+    }
+    if(topics.includes('Shampoos')){
+        result.Shampoos = await Products.Shampoo.find()
+    }
+
+    console.log("topics", topics);
+
+    res.json(result);
+});
 
 // Connect to MongoDB
 mongoose

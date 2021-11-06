@@ -12,17 +12,18 @@ box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);">
           <p class="lead">You have successfully logged in to our system.</p>
           <hr class="my-4">
           <p>Subscribe to our topics below to get real time updates</p>
-          <p class="lead text-align-center" style="color:white;" >
-            <button type="button" class="btn btn-primary m-5" (click) = "subscribeToTopic('IPhoneProducts')" >IPhone</button>
-            <button type="button" class="btn btn-primary m-5" (click) = "subscribeToTopic('MacBookProducts')" >Mac Book</button>
-            <button type="button" class="btn btn-primary m-5" (click) = "subscribeToTopic('MysteryBooksProducts')">Mystery Books</button>
-          </p>
-          <p class="lead text-align-center" style="color:white;" >
-            <button type="button" class="btn btn-info m-5" (click) = "subscribeToTopic('IPhoneProducts')" >Poll</button>
-          </p>
-        </div>
+          <div>
+            <div class="mb-3" *ngFor="let available_topic of available_topics">
+              <h3>{{available_topic}}</h3>
+              <div class="lead text-align-center" style="color:white;">
+                <button type="button" class="btn btn-primary" (click) = "subscribeToTopic(available_topic)" >Subscribe</button>
+                <button type="button" class="btn btn-danger" (click) = "unsubscribeToTopic(available_topic)" >Unsubscribe</button>
+              </div>
+            </div>
+          </div>
+       </div>
   </div>
-  <div *ngIf="result?.IPhoneProducts?.length > 0">
+  <div *ngIf="broker1_result?.IPhoneProducts?.length > 0">
     <h3>IPhone Products</h3>
     <table class="table table-dark">
       <thead>
@@ -32,7 +33,7 @@ box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);">
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let product of result?.IPhoneProducts">
+        <tr *ngFor="let product of broker1_result?.IPhoneProducts">
           <td>{{product.title}}</td>
           <td><a href="{{product.full_link}}" >{{product.full_link}}</a></td>
         </tr>
@@ -40,7 +41,7 @@ box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);">
     </table>
   </div>
 
-  <div *ngIf="result?.MacBookProducts?.length > 0">
+  <div *ngIf="broker1_result?.MacBookProducts?.length > 0">
     <h3>MacBook Products</h3>
     <table class="table table-dark">
       <thead>
@@ -50,7 +51,7 @@ box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);">
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let product of result?.MacBookProducts">
+        <tr *ngFor="let product of broker1_result?.MacBookProducts">
           <td>{{product.title}}</td>
           <td><a href="{{product.full_link}}" >{{product.full_link}}</a></td>
         </tr>
@@ -58,7 +59,25 @@ box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);">
     </table>
   </div>
 
-  <div *ngIf="result?.MysteryBooksProducts?.length > 0">
+  <div *ngIf="broker2_result?.MysteryBooks?.length > 0">
+    <h3>Mystery Books</h3>
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">Title</th>
+          <th scope="col">Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of broker2_result?.MysteryBooks">
+          <td>{{product.title}}</td>
+          <td><a href="{{product.full_link}}" >{{product.full_link}}</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="broker2_result?.RomanticNovels?.length > 0">
     <h3>Mystery Book Products</h3>
     <table class="table table-dark">
       <thead>
@@ -68,7 +87,41 @@ box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);">
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let product of result?.MysteryBooksProducts">
+        <tr *ngFor="let product of broker2_result?.RomanticNovels">
+          <td>{{product.title}}</td>
+          <td><a href="{{product.full_link}}" >{{product.full_link}}</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="broker3_result?.Moisturizers?.length > 0">
+    <h3>Mystery Book Products</h3>
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">Title</th>
+          <th scope="col">Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of broker3_result?.Moisturizers">
+          <td>{{product.title}}</td>
+          <td><a href="{{product.full_link}}" >{{product.full_link}}</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="broker3_result?.Shampoos?.length > 0">
+    <h3>Mystery Book Products</h3>
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">Title</th>
+          <th scope="col">Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of broker3_result?.Shampoos">
           <td>{{product.title}}</td>
           <td><a href="{{product.full_link}}" >{{product.full_link}}</a></td>
         </tr>

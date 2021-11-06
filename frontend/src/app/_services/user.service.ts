@@ -10,7 +10,13 @@ import { Router } from '@angular/router';
 })
 export class UserService {
   baseUrl = environment.apiUrl;
+<<<<<<< HEAD
   constructor(private http: HttpClient, private router: Router) { }
+=======
+  baseUrl2 = environment.apiUrl2;
+  baseUrl3 = environment.apiUrl3;
+  constructor(private http:HttpClient, private router: Router) { }
+>>>>>>> 768e566ed1f97b1e2568c756162d8e135fc83852
 
   private currentUserSource = new ReplaySubject<any>(1);
   currentUser$ = this.currentUserSource.asObservable();
@@ -61,7 +67,23 @@ export class UserService {
     })
   }
 
+<<<<<<< HEAD
   getSubscriptions() {
+=======
+  unsubscribeToTopic(topic){
+    let body:any = {
+      'username' : this.username,
+      'topic': topic
+    }
+    return this.http.post(this.baseUrl + '/subscribe/unregister',body,{
+      observe:'body',
+      withCredentials:true,
+      headers:new HttpHeaders().append('Content-Type','application/json')
+    })
+  }
+
+  getSubscriptions(){
+>>>>>>> 768e566ed1f97b1e2568c756162d8e135fc83852
     var params = new HttpParams();
     params = params.append('username', this.username);
 
@@ -73,8 +95,35 @@ export class UserService {
       headers: new HttpHeaders().append('Content-Type', 'application/json')
     });
   }
+  getSubscriptions_broker2(){
+    var params = new HttpParams();
+    params = params.append('username',this.username);
 
+<<<<<<< HEAD
   logout() {
+=======
+
+    return this.http.get(this.baseUrl2 + '/subscribe',{
+      observe:'body',
+      params,
+      withCredentials:true,
+      headers:new HttpHeaders().append('Content-Type','application/json')
+    });
+  }
+  getSubscriptions_broker3(){
+    var params = new HttpParams();
+    params = params.append('username',this.username);
+
+
+    return this.http.get(this.baseUrl3 + '/subscribe',{
+      observe:'body',
+      params,
+      withCredentials:true,
+      headers:new HttpHeaders().append('Content-Type','application/json')
+    });
+  }
+  logout(){
+>>>>>>> 768e566ed1f97b1e2568c756162d8e135fc83852
     // return this.http.get('http://127.0.0.1:3000/users/logout',{
     //   observe:'body',
     //   withCredentials:true,
