@@ -7,7 +7,7 @@ module.exports = function fetchDataFromAPI(Topic) {
         params: { country: 'US', query: Topic, page: '1' },
         headers: {
             'x-rapidapi-host': 'amazon-products1.p.rapidapi.com',
-            'x-rapidapi-key': 'bfb6193e00msh5198d1c872bba32p160f59jsn2627c641dc72'
+            'x-rapidapi-key': '0a8d3e5c3bmsh9dd96bb27719452p1d9583jsn3531904d5cfb'
         }
     };
 

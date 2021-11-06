@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 
 
-const Topics = ["IPHONE", "MACBOOK", "MYSTERY BOOKS", "ROMANTIC NOVELS", "MOISTURISER", "SHAMPOO"];
+const Topics = ["MYSTERY BOOKS", "ROMANTIC NOVELS", "MOISTURISER", "SHAMPOO"];
 const totalTopics = Topics.length;
 
 
