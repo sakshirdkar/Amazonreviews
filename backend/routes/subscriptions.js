@@ -53,7 +53,7 @@ router.post('/unregister', async (req, res) => {
     })
     Subscription.deleteOne({ username: new_subscription.username, topic: new_subscription.topic }, function (err, obj) {
         if (err) throw err;
-        console.log("unsibscribed");
+        console.log("unsubscribed");
     })
 
 });
