@@ -12,23 +12,16 @@ box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);">
           <p class="lead">You have successfully logged in to our system.</p>
           <hr class="my-4">
           <p>Subscribe to our topics below to get real time updates</p>
-          <div class="lead text-align-center" style="color:white;" >
-            <div>
-              <button type="button" class="btn btn-primary m-5" (click) = "subscribeToTopic('IPhoneProducts')" >IPhone</button>
-            <button type="button" class="btn btn-danger m-5" (click) = "subscribeToTopic('IPhoneProducts')" >IPhone</button>
-            
+          <div>
+            <div class="mb-3" *ngFor="let available_topic of available_topics">
+              <h3>{{available_topic}}</h3>
+              <div class="lead text-align-center" style="color:white;">
+                <button type="button" class="btn btn-primary" (click) = "subscribeToTopic(available_topic)" >Subscribe</button>
+                <button type="button" class="btn btn-danger" (click) = "unsubscribeToTopic(available_topic)" >Unsubscribe</button>
+              </div>
             </div>
-
-            <button type="button" class="btn btn-primary m-5" (click) = "subscribeToTopic('MacBookProducts')" >Mac Book</button>
-            <button type="button" class="btn btn-primary m-5" (click) = "subscribeToTopic('MysteryBooks')">Mystery Books</button>
-            <button type="button" class="btn btn-primary m-5" (click) = "subscribeToTopic('RomanticNovels')">RomanticNovels</button>
-            <button type="button" class="btn btn-primary m-5" (click) = "subscribeToTopic('Moisturizers')">Moisturizers</button>
-            <button type="button" class="btn btn-primary m-5" (click) = "subscribeToTopic('Shampoos')">Shampoos</button>
           </div>
-          <p class="lead text-align-center" style="color:white;" >
-            <button type="button" class="btn btn-info m-5" (click) = "subscribeToTopic('IPhoneProducts')" >Poll</button>
-          </p>
-        </div>
+       </div>
   </div>
   <div *ngIf="broker1_result?.IPhoneProducts?.length > 0">
     <h3>IPhone Products</h3>

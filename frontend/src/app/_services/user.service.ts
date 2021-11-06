@@ -63,6 +63,18 @@ export class UserService {
     })
   }
 
+  unsubscribeToTopic(topic){
+    let body:any = {
+      'username' : this.username,
+      'topic': topic
+    }
+    return this.http.post(this.baseUrl + '/subscribe/unregister',body,{
+      observe:'body',
+      withCredentials:true,
+      headers:new HttpHeaders().append('Content-Type','application/json')
+    })
+  }
+
   getSubscriptions(){
     var params = new HttpParams();
     params = params.append('username',this.username);
@@ -99,7 +111,6 @@ export class UserService {
       headers:new HttpHeaders().append('Content-Type','application/json')
     });
   }
-
   logout(){
     // return this.http.get('http://127.0.0.1:3000/users/logout',{
     //   observe:'body',

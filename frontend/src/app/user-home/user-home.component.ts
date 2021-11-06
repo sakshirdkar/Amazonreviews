@@ -8,7 +8,14 @@ import { UserService } from '../_services/user.service';
   styleUrls: ['./user-home.component.css']
 })
 export class UserHomeComponent implements OnInit {
-
+  available_topics: any = [
+    'IPhoneProducts', 
+    'MacBookProducts', 
+    'MysteryBooks', 
+    'RomanticNovels', 
+    'Moisturizers', 
+    'Shampoos' 
+  ]
   broker1_result : any = {};
   broker2_result : any = {};
   broker3_result : any = {};
@@ -24,8 +31,16 @@ export class UserHomeComponent implements OnInit {
     )
   }
   subscribeToTopic(topic){
-    this._user.subscribeToTopic(topic).subscribe();
-    this.poll();
+    this._user.subscribeToTopic(topic).subscribe(() =>{
+      this.poll();
+    });
+  }
+
+  unsubscribeToTopic(topic){
+    console.log("topic to un", topic)
+    this._user.unsubscribeToTopic(topic).subscribe(() =>{
+      this.poll();
+    });
   }
 
   getSubscriptions(){
@@ -54,7 +69,7 @@ export class UserHomeComponent implements OnInit {
   }
   ngOnInit() {
     this.poll();
-    setInterval(()=> { this.poll(), console.log('polling') },10000);
+    setInterval(()=> { this.poll(), console.log('polling') },1000);
   }
   poll(){
     this.getSubscriptions();
