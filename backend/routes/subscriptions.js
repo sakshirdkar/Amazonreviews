@@ -14,20 +14,15 @@ router.get('/', async (req, res) => {
     });
     var IPhoneProducts = {}
     var MacBookProducts = {}
-    var MysteryBooksProducts = {}
     var result = {
         'IPhoneProducts' : IPhoneProducts,
         'MacBookProducts' : MacBookProducts,
-        'MysteryBooksProducts' : MysteryBooksProducts
     }
     if(topics.includes('IPhoneProducts')){
         result.IPhoneProducts = await ProductModel.IPhoneProducts.find()
     }
     if(topics.includes('MacBookProducts')){
         result.MacBookProducts = await ProductModel.MacBookProducts.find()
-    }
-    if(topics.includes('MysteryBooksProducts')){
-        result.MysteryBooksProducts = await ProductModel.MysteryBooksProducts.find()
     }
 
     console.log("topics", topics);

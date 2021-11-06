@@ -5,11 +5,14 @@ const app = express();
 const cors = require('cors');
 const Products = require('./database/models/Product');
 const brokerAddress = require('./mapTopicToBroker');
-const Subscription = require('../database/models/Subscription');
+const Subscription = require('./database/models/Subscription');
 
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin:['http://localhost:4200','http://127.0.0.1:4200'],
+    credentials:true
+  }));
 app.use(express.urlencoded({ extended: false }));
 
 const TopicMysteryBooks = "MYSTERY BOOKS";
@@ -85,7 +88,7 @@ app.post('/', async (req, res) => {
 })
 
 
-router.get('/subscribe', async (req, res) => {
+app.get('/subscribe', async (req, res) => {
     const subscriptions = await Subscription.find();
     var username = req.query.username;
     topics = []
@@ -102,10 +105,10 @@ router.get('/subscribe', async (req, res) => {
     }
 
     if(topics.includes('MysteryBooks')){
-        result.MysteryBooks = await ProductModel.MysteryBook.find()
+        result.MysteryBooks = await Products.MysteryBook.find()
     }
     if(topics.includes('RomanticNovels')){
-        result.RomanticNovels = await ProductModel.RomanticNovel.find()
+        result.RomanticNovels = await Products.RomanticNovel.find()
     }
 
     console.log("topics", topics);

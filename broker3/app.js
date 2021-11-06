@@ -4,12 +4,16 @@ const request = require('request');
 const app = express();
 const cors = require('cors');
 const Products = require('./database/models/Product');
+const Subscriptions = require('./database/models/Subscription');
 const brokerAddress = require('./mapTopicToBroker');
 
 
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin:['http://localhost:4200','http://127.0.0.1:4200'],
+    credentials:true
+  }));
 app.use(express.urlencoded({ extended: false }));
 
 
@@ -84,8 +88,8 @@ app.post('/', async (req, res) => {
 })
 
 
-router.get('/subscribe', async (req, res) => {
-    const subscriptions = await Subscription.find();
+app.get('/subscribe', async (req, res) => {
+    const subscriptions = await Subscriptions.find();
     var username = req.query.username;
     topics = []
     subscriptions.forEach(element => {
