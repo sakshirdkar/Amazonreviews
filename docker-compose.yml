@@ -16,6 +16,24 @@ services:
       - mongo
     depends_on:
       - mongo
+  broker2:
+    container_name: broker2
+    build: ./broker2 # specify the directory of the Dockerfile
+    ports:
+      - "8081:8081"
+    links:
+      - mongo
+    depends_on:
+      - mongo
+  broker3:
+    container_name: broker3
+    build: ./broker3 # specify the directory of the Dockerfile
+    ports:
+      - "8082:8082"
+    links:
+      - mongo
+    depends_on:
+      - mongo
   mongo: # name of the third service
     container_name: mongo
     image: mongo
@@ -27,7 +45,7 @@ services:
     container_name: mongo-express
     image: mongo-express
     ports:
-      - "8081:8081"
+      - "3002:8081"
     environment:
       - ME_CONFIG_MONGODB_SERVER=mongo
   publisher:
@@ -35,6 +53,10 @@ services:
     build: ./publisher # specify the directory of the Dockerfile
     ports:
       - "3001:3001"
+    depends_on:
+      - server
+      - broker2
+      - broker3
 volumes:
   mongo-data:
     driver: local

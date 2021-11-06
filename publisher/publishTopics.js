@@ -1,5 +1,6 @@
 const express = require('express');
 const request = require('request');
+const mapTopicToBroker = require('./mapTopicToBroker');
 const fetchDataFromAPI = require('./fetchDataFromAPI');
 
 
@@ -7,61 +8,24 @@ const app = express();
 app.use(express.json());
 
 
-// const TopicIphone = "IPHONE";
-// const TopicMacBook = "MACBOOK";
-// const TopicMysteryBooks = "MYSTERY BOOKS";
-// //Topics 1,2,3
-
-
-// fetchDataFromAPI(TopicIphone).then(data => {
-//     var model = {
-//         "topicName": TopicIphone,
-//         "results": data
-//     }
-//     publish(model)
-// });
-
-// fetchDataFromAPI(TopicMysteryBooks).then(data => {
-//     var model = {
-//         "topicName": TopicMysteryBooks,
-//         "results": data
-//     }
-//     publish(model)
-// });
-
-// fetchDataFromAPI(TopicMacBook).then(data => {
-//     var model = {
-//         "topicName": TopicMacBook,
-//         "results": data
-//     }
-//     publish(model)
-// });
-
-
-
-
 const Topics = ["IPHONE", "MACBOOK", "MYSTERY BOOKS", "ROMANTIC NOVELS", "MOISTURISER", "SHAMPOO"];
-
 const totalTopics = Topics.length;
-const brokerUrls = ["http://server:8080/products/", "http://server:8081/products/", "http://server:8082/products/"];
-const topicPerBroker = len / brokerUrls.count;
 
-let broker = 0;
-let i = 1;
+
+let i = 0;
 while (i < totalTopics) {
-    let j = 1;
-    while (j <= topicPerBroker) {
-        fetchDataFromAPI(Topics[i]).then(data => {
-            var model = {
-                "topicName": Topics[i],
-                "results": data
-            }
-            publish(model,brokerUrls[broker])
-        });
-        j++;
-        i++;
-    }
-    broker++;
+
+    //var data = fetchDataFromAPI(Topics[i]);
+    fetchDataFromAPI(Topics[i]).then(data => {
+        //console.log(data);
+        console.log(i)
+        var model = {
+            "topicName": Topics[i],
+            "results": data
+        }
+        const url = mapTopicToBroker(Topics[i++]);
+        publish(model, url);
+    });
 }
 
 

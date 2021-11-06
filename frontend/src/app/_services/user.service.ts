@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import {map} from'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -10,38 +10,38 @@ import { Router } from '@angular/router';
 })
 export class UserService {
   baseUrl = environment.apiUrl;
-  constructor(private http:HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   private currentUserSource = new ReplaySubject<any>(1);
   currentUser$ = this.currentUserSource.asObservable();
 
-  username : string;
+  username: string;
 
-  register(body:any){
-    return this.http.post(this.baseUrl + '/users/register',body,{
-      observe:'body',
-      headers:new HttpHeaders().append('Content-Type','application/json')
+  register(body: any) {
+    return this.http.post(this.baseUrl + '/users/register', body, {
+      observe: 'body',
+      headers: new HttpHeaders().append('Content-Type', 'application/json')
     });
   }
 
-  login(body:any){
+  login(body: any) {
     console.log(body);
-    return this.http.post(this.baseUrl + '/users/login',body,{
-      observe:'body',
-      withCredentials:true,
-      headers:new HttpHeaders().append('Content-Type','application/json')
+    return this.http.post(this.baseUrl + '/users/login', body, {
+      observe: 'body',
+      withCredentials: true,
+      headers: new HttpHeaders().append('Content-Type', 'application/json')
     });
   }
 
-  user(){
-    return this.http.get(this.baseUrl + '/users/user',{
-      observe:'body',
-      withCredentials:true,
-      headers:new HttpHeaders().append('Content-Type','application/json')
+  user() {
+    return this.http.get(this.baseUrl + '/users/user', {
+      observe: 'body',
+      withCredentials: true,
+      headers: new HttpHeaders().append('Content-Type', 'application/json')
     }).pipe(
-      map((response : any)=>{
+      map((response: any) => {
         const user = response;
-        if(user){
+        if (user) {
           this.username = user.username;
         }
         return this.username;
@@ -49,32 +49,32 @@ export class UserService {
     );
   }
 
-  subscribeToTopic(topic){
-    let body:any = {
-      'username' : this.username,
+  subscribeToTopic(topic) {
+    let body: any = {
+      'username': this.username,
       'topic': topic
     }
-    return this.http.post(this.baseUrl + '/subscribe',body,{
-      observe:'body',
-      withCredentials:true,
-      headers:new HttpHeaders().append('Content-Type','application/json')
+    return this.http.post(this.baseUrl + '/subscribe', body, {
+      observe: 'body',
+      withCredentials: true,
+      headers: new HttpHeaders().append('Content-Type', 'application/json')
     })
   }
 
-  getSubscriptions(){
+  getSubscriptions() {
     var params = new HttpParams();
-    params = params.append('username',this.username);
+    params = params.append('username', this.username);
 
 
-    return this.http.get(this.baseUrl + '/subscribe',{
-      observe:'body',
+    return this.http.get(this.baseUrl + '/subscribe', {
+      observe: 'body',
       params,
-      withCredentials:true,
-      headers:new HttpHeaders().append('Content-Type','application/json')
+      withCredentials: true,
+      headers: new HttpHeaders().append('Content-Type', 'application/json')
     });
   }
 
-  logout(){
+  logout() {
     // return this.http.get('http://127.0.0.1:3000/users/logout',{
     //   observe:'body',
     //   withCredentials:true,
@@ -84,8 +84,8 @@ export class UserService {
     this.router.navigate(['/login'])
   }
 
-  setCurrentUser(user : any){
-    localStorage.setItem('user',JSON.stringify(user));
+  setCurrentUser(user: any) {
+    localStorage.setItem('user', JSON.stringify(user));
     this.currentUserSource.next(user);
     console.log("user local ", user)
   }

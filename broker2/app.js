@@ -17,7 +17,7 @@ const TopicRomanticNovels = "ROMANTIC NOVELS";
 // const TopicMoisturiser= "MOISTURISER";
 // const TopicShampoo = "SHAMPOO";
 
-function redirect(_url,_body){
+function redirect(_url, _body) {
     console.log(data);
     const options = {
         url: _url,
@@ -39,7 +39,7 @@ function redirect(_url,_body){
 app.post('/', async (req, res) => {
     const body = req.body;
     const topicName = body.topicName;
-    var products =  body.results;
+    var products = body.results;
     if (topicName == TopicMysteryBooks) {
         products.forEach(productFromAPI => {
             console.log(productFromAPI);
@@ -79,19 +79,19 @@ app.post('/', async (req, res) => {
         })
 
     }
-    else{
-        redirect(brokerAddress(topicName),body);
+    else {
+        redirect(brokerAddress(topicName), body);
     }
 })
 
 // Connect to MongoDB
 mongoose
-  .connect(
-    'mongodb://localhost:27017/AmazonProducts',
-    { useNewUrlParser: true }
-  )
-  .then(() => console.log('MongoDB Connected'))
-  .catch(err => console.log(err));
+    .connect(
+        'mongodb://mongo:27017/AmazonProducts',
+        { useNewUrlParser: true }
+    )
+    .then(() => console.log('MongoDB Connected'))
+    .catch(err => console.log(err));
 
 
 const port = 8081;
