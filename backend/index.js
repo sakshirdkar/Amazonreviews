@@ -7,8 +7,8 @@ app.set('view engine', 'ejs');
 
 app.use(express.json());
 app.use(cors({
-  origin:['http://localhost:4200','http://127.0.0.1:4200'],
-  credentials:true
+  origin: ['http://localhost:4200', 'http://127.0.0.1:4200'],
+  credentials: true
 }));
 app.use(express.urlencoded({ extended: false }));
 
@@ -16,14 +16,14 @@ app.use(express.urlencoded({ extended: false }));
 var passport = require('passport');
 var session = require('express-session');
 app.use(session({
-  name:'myname.sid',
-  resave:false,
-  saveUninitialized:false,
-  secret:'secret',
-  cookie:{
-    maxAge:36000000,
-    httpOnly:false,
-    secure:false
+  name: 'myname.sid',
+  resave: false,
+  saveUninitialized: false,
+  secret: 'secret',
+  cookie: {
+    maxAge: 36000000,
+    httpOnly: false,
+    secure: false
   },
 }));
 require('./passport-config');
@@ -36,14 +36,14 @@ const messageRoutes = require('./routes/messages');
 const productroutes = require('./routes/products');
 const userRoutes = require('./routes/users');
 const subscriptionRoutes = require('./routes/subscriptions');
-app.use('/users/',userRoutes);
-app.use('/products/',productroutes);
-app.use('/subscribe/',subscriptionRoutes);
+app.use('/users/', userRoutes);
+app.use('/products/', productroutes);
+app.use('/subscribe/', subscriptionRoutes);
 
 // Connect to MongoDB
 mongoose
   .connect(
-    'mongodb://localhost:27017/AmazonProducts',
+    'mongodb://mongo:27017/AmazonProducts',
     { useNewUrlParser: true }
   )
   .then(() => console.log('MongoDB Connected'))

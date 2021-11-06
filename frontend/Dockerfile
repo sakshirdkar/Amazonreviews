@@ -1,4 +1,4 @@
-FROM node:latest as build
+FROM node:14 as build
 
 # Set the working directory
 WORKDIR /usr/src/app/frontend

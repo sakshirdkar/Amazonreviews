@@ -22,4 +22,4 @@ module.exports = function mapTopicToBroker(searchTopic) {
     return resultUrl;
 }
 
-console.log(mapTopicToBroker("ROMANTIC NOVELS"));
+//console.log(mapTopicToBroker("ROMANTIC NOVELS"));
