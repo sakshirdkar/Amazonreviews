@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 })
 export class UserService {
   baseUrl = environment.apiUrl;
+  baseUrl2 = environment.apiUrl2;
+  baseUrl3 = environment.apiUrl3;
   constructor(private http:HttpClient, private router: Router) { }
 
   private currentUserSource = new ReplaySubject<any>(1);
@@ -67,6 +69,30 @@ export class UserService {
 
 
     return this.http.get(this.baseUrl + '/subscribe',{
+      observe:'body',
+      params,
+      withCredentials:true,
+      headers:new HttpHeaders().append('Content-Type','application/json')
+    });
+  }
+  getSubscriptions_broker2(){
+    var params = new HttpParams();
+    params = params.append('username',this.username);
+
+
+    return this.http.get(this.baseUrl2 + '/subscribe',{
+      observe:'body',
+      params,
+      withCredentials:true,
+      headers:new HttpHeaders().append('Content-Type','application/json')
+    });
+  }
+  getSubscriptions_broker3(){
+    var params = new HttpParams();
+    params = params.append('username',this.username);
+
+
+    return this.http.get(this.baseUrl3 + '/subscribe',{
       observe:'body',
       params,
       withCredentials:true,

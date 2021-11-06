@@ -5,7 +5,7 @@ const app = express();
 const cors = require('cors');
 const Products = require('./database/models/Product');
 const brokerAddress = require('./mapTopicToBroker');
-
+const Subscription = require('../database/models/Subscription');
 
 
 app.use(express.json());
@@ -83,6 +83,35 @@ app.post('/', async (req, res) => {
         redirect(brokerAddress(topicName),body);
     }
 })
+
+
+router.get('/subscribe', async (req, res) => {
+    const subscriptions = await Subscription.find();
+    var username = req.query.username;
+    topics = []
+    subscriptions.forEach(element => {
+        if (username == element.username) {
+            topics.push(element.topic)
+        }
+    });
+    var MysteryBooks = {}
+    var RomanticNovels = {}
+    var result = {
+        'MysteryBooks' : MysteryBooks,
+        'RomanticNovels' : RomanticNovels
+    }
+
+    if(topics.includes('MysteryBooks')){
+        result.MysteryBooks = await ProductModel.MysteryBook.find()
+    }
+    if(topics.includes('RomanticNovels')){
+        result.RomanticNovels = await ProductModel.RomanticNovel.find()
+    }
+
+    console.log("topics", topics);
+
+    res.json(result);
+});
 
 // Connect to MongoDB
 mongoose
