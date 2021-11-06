@@ -38,7 +38,6 @@ export class UserHomeComponent implements OnInit {
   getSubscriptions_broker2(){
     this._user.getSubscriptions_broker2().subscribe(res  =>{
       this.broker2_result = res;
-      console.log("broker 2");
       console.log(this.broker2_result);
     });
   }
@@ -46,7 +45,6 @@ export class UserHomeComponent implements OnInit {
   getSubscriptions_broker3(){
     this._user.getSubscriptions_broker3().subscribe(res  =>{
       this.broker3_result = res;
-      console.log("broker 3");
       console.log(this.broker3_result);
     });
   }

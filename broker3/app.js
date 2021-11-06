@@ -105,10 +105,10 @@ app.get('/subscribe', async (req, res) => {
     }
 
     if(topics.includes('Moisturizers')){
-        result.Moisturizers = await ProductModel.Moisturizer.find()
+        result.Moisturizers = await Products.Moisturizer.find()
     }
     if(topics.includes('Shampoos')){
-        result.Shampoos = await ProductModel.Shampoo.find()
+        result.Shampoos = await Products.Shampoo.find()
     }
 
     console.log("topics", topics);
