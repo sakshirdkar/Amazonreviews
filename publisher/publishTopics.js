@@ -7,18 +7,26 @@ const fetchDataFromAPI = require('./fetchDataFromAPI');
 const app = express();
 app.use(express.json());
 
-
-const Topics = ["MYSTERY BOOKS", "ROMANTIC NOVELS", "MOISTURISER", "SHAMPOO"];
+// const Topics = ["IPHONE", "MACBOOK", "MYSTERY BOOKS", "ROMANTIC NOVELS", "MOISTURISER", "SHAMPOO"];
+const Topics = ["SHAMPOO"];
 const totalTopics = Topics.length;
 
 
 let i = 0;
 while (i < totalTopics) {
 
-    //var data = fetchDataFromAPI(Topics[i]);
+    // var data = fetchDataFromAPI(Topics[i]);
+    // var model = {
+    //     "topicName": Topics[i],
+    //     "results": data
+    // }
+    // const url = mapTopicToBroker(Topics[i++]);
+    // publish(model, url);
+
+
     fetchDataFromAPI(Topics[i]).then(data => {
         //console.log(data);
-        console.log(i)
+        console.log(Topics[i]);
         var model = {
             "topicName": Topics[i],
             "results": data

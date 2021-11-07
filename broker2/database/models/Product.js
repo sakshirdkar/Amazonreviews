@@ -13,7 +13,7 @@ const ProductSchema = mongoose.Schema({
     title: String,
 });
 
-const MysteryBook = mongoose.model('MysteryBooks', ProductSchema);
+const MysteryBook = mongoose.model('MysteryBooksProducts', ProductSchema);
 const RomanticNovel = mongoose.model('RomanticNovels', ProductSchema);
 
 module.exports = {

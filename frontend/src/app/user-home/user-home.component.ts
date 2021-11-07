@@ -37,7 +37,6 @@ export class UserHomeComponent implements OnInit {
   }
 
   unsubscribeToTopic(topic){
-    console.log("topic to un", topic)
     this._user.unsubscribeToTopic(topic).subscribe(() =>{
       this.poll();
     });
@@ -46,6 +45,7 @@ export class UserHomeComponent implements OnInit {
   getSubscriptions(){
     this._user.getSubscriptions().subscribe(res  =>{
       this.broker1_result = res;
+      console.log('broker 1 polled');
       console.log(this.broker1_result);
     });
   }
@@ -69,7 +69,7 @@ export class UserHomeComponent implements OnInit {
   }
   ngOnInit() {
     this.poll();
-    setInterval(()=> { this.poll(), console.log('polling') },1000);
+    // setInterval(()=> { this.poll(), console.log('polling') },2000);
   }
   poll(){
     this.getSubscriptions();

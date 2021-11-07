@@ -25,8 +25,7 @@ router.get('/', async (req, res) => {
         result.MacBookProducts = await ProductModel.MacBookProducts.find()
     }
 
-    console.log("topics", topics);
-
+    console.log('topics ', topics)
     res.json(result);
 });
 
@@ -37,24 +36,26 @@ router.post('/', async (req, res) => {
     })
     Subscription.findOne({ username: new_subscription.username, topic: new_subscription.topic }, function (err, subscription) {
         if (subscription) { 
-            console.log("subscription already exists") 
+            console.log("subscription already exists");
         } else 
         { 
             new_subscription.save();
         }
     })
-
+    
 });
 
 router.post('/unregister', async (req, res) => {
+    console.log("inside unregister");
     const new_subscription = new Subscription({
         username: req.body.username,
         topic: req.body.topic
     })
     Subscription.deleteOne({ username: new_subscription.username, topic: new_subscription.topic }, function (err, obj) {
-        if (err) throw err;
+        if (err){
+            console.log('an error has occured');
+        };
         console.log("unsubscribed");
     })
-
 });
 module.exports = router;

@@ -92,7 +92,7 @@ export class UserService {
     params = params.append('username', this.username);
 
 
-    return this.http.get(this.baseUrl2 + '/subscribe', {
+    return this.http.get('http://127.0.0.1:8081/subscribe', {
       observe: 'body',
       params,
       withCredentials: true,
@@ -104,7 +104,7 @@ export class UserService {
     params = params.append('username', this.username);
 
 
-    return this.http.get(this.baseUrl3 + '/subscribe', {
+    return this.http.get('http://127.0.0.1:8082/subscribe', {
       observe: 'body',
       params,
       withCredentials: true,

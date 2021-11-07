@@ -39,7 +39,7 @@ function redirect(_url, _body) {
 
 
 
-app.post('/', async (req, res) => {
+app.post('/products/', async (req, res) => {
     const body = req.body;
     const topicName = body.topicName;
     var products = body.results;

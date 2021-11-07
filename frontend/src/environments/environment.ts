@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  apiUrl: process.env.API_URL || 'http://127.0.0.1:8080',
-  apiUrl2: process.env.API_URL || 'http://127.0.0.1:8080',
-  apiUrl3: process.env.API_URL || 'http://127.0.0.1:8080'
+  apiUrl: 'http://server:8080' || 'http://127.0.0.1:8080',
+  apiUrl2: 'http://broker2:8081' || 'http://127.0.0.1:8081',
+  apiUrl3: 'http://broker3:8082' || 'http://127.0.0.1:8082'
   // apiUrl:'http://127.0.0.1:8080',
   // apiUrl2:'http://127.0.0.1:8081',
   // apiUrl3:'http://127.0.0.1:8082'
