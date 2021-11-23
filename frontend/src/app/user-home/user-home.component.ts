@@ -69,7 +69,7 @@ export class UserHomeComponent implements OnInit {
   }
   ngOnInit() {
     this.poll();
-    // setInterval(()=> { this.poll(), console.log('polling') },2000);
+    setInterval(()=> { this.poll(), console.log('polling') },3000);
   }
   poll(){
     this.getSubscriptions();

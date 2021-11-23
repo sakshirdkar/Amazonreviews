@@ -15,15 +15,6 @@ const totalTopics = Topics.length;
 let i = 0;
 while (i < totalTopics) {
 
-    // var data = fetchDataFromAPI(Topics[i]);
-    // var model = {
-    //     "topicName": Topics[i],
-    //     "results": data
-    // }
-    // const url = mapTopicToBroker(Topics[i++]);
-    // publish(model, url);
-
-
     fetchDataFromAPI(Topics[i]).then(data => {
         //console.log(data);
         console.log(Topics[i]);
